@@ -5,7 +5,7 @@ Run Postgres in Kubernetes
     kubectl apply -f postgres-persistent-storage.yaml
     ```
 
-2. Now create the statefuul set
+2. Now create the statefulset
     ```
     kubectl apply -f postgres-statefulset.yaml
     ```

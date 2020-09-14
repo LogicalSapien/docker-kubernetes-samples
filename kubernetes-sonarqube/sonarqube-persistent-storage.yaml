@@ -1,0 +1,61 @@
+# Sonar data pvc
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: sonarqube-data-pv
+  labels:
+    type: local
+    app: sonarqube
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: "/mnt/data"
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: sonarqube-data-pvc
+  labels:
+    app: sonarqube
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi
+---
+# Sonar extensions pvc
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: sonarqube-extensions-pv
+  labels:
+    type: local
+    app: sonarqube
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: "/mnt/data"
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: sonarqube-extensions-pvc
+  labels:
+    app: sonarqube
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi      
