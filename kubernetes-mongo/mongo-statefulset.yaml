@@ -1,0 +1,57 @@
+---
+# We can add the user vlaues as config map or secrets
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mongodb-config
+  labels:
+    app: mongo
+data:
+  MONGO_INITDB_ROOT_USERNAME: admin
+  MONGO_INITDB_ROOT_PASSWORD: admin123
+---  
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mongo
+spec:
+  serviceName: "mongo"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongo
+  template:
+    metadata:
+      labels:
+        app: mongo
+    spec:
+      containers:
+        - name: mongo
+          image: mongo:4.4.1
+          ports:
+            - containerPort: 27017
+          envFrom:
+            - configMapRef:
+                name: mongodb-config
+          volumeMounts:
+            - mountPath: /data/db
+              name: mongo-data
+      volumes:
+        - name: mongo-data
+          persistentVolumeClaim:
+            claimName: mongo-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongo
+  labels:
+    app: mongo
+spec:
+  type: NodePort
+  ports:
+   - port: 27017
+  selector:
+   app: mongo            
+
+
