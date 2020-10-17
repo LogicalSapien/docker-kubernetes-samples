@@ -1,4 +1,4 @@
-Run mongo in Kubernetes with replicaset using sidecar
+Run mongo in Kubernetes with replicaset using scripts
 
 1. First create the PersistentVolume and PersistentVolumeClaim
     ```
@@ -15,6 +15,6 @@ Run mongo in Kubernetes with replicaset using sidecar
     kubectl get all
     ```
 
-As described in this blogpost:
+As described here, but on Local/Custom kubernetes cluster:
 
-https://kubernetes.io/blog/2017/01/running-mongodb-on-kubernetes-with-statefulsets/
+https://github.com/pkdone/gke-mongodb-demo
